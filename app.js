@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+require('dotenv').config()
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -16,8 +17,9 @@ app.use(helmet());
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var dev_db_url = 'mongodb+srv://fullstack:FullSt4ck@cluster0.hzrpt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://fullstack:<PASSWORD>@cluster0.hzrpt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
+//console.log(process.env.MONGODB_URI);
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
